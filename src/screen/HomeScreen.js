@@ -12,20 +12,9 @@ export default class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-            isLoading: true,
             newsFromServer: [],
             mUser: null,
             mPass: null,
-            _id: null,
-            email: null,
-            phone: null,
-            name: null,
-            avatar: null,
-            role: null,
-            created: null,
-            __v: null,
-            isVIP: null,
-
         })
     }
 
@@ -35,26 +24,18 @@ export default class HomeScreen extends Component {
     }
 
     _getProfile = async () => {
-
-
         await AsyncStorage.multiGet(['@UserName:key', '@Password:key']).then(response => {
+            console.log(response)
             this.setState({
                 mUser: response[0][1],
                 mPass: response[1][1]
             })
         });
 
-        console.log("Home state " + this.state.mUser)
-        console.log("Home state " + this.state.mPass)
-
-       // const { navigation } = this.props;
-
         const Account = {
             username: this.state.mUser,
             password: this.state.mPass
         };
-        // console.log("Home acc " + Account.username)
-        // console.log("Home acc " + Account.password)
 
         getProfile(Account).then((data) => {
             this.setState({
@@ -62,7 +43,7 @@ export default class HomeScreen extends Component {
                 avatar: data.user.avatar
             });
         }).catch((error) => {
-            console.log("Error getProfile " + error)
+            console.log("Home Screen : Error getProfile " + error)
         });
     }
 
@@ -71,16 +52,14 @@ export default class HomeScreen extends Component {
             this.setState({ newsFromServer: news });
         }).catch((error) => {
             this.setState({ newsFromServer: [] });
-            console.log("Error refreshDataFromServer")
+            console.log("Home Screen : Error refreshDataFromServer")
         });
     }
 
     _onPressItem = (item) => {
         const { navigation } = this.props;
-        //console.log(url);
         navigation.navigate('WebView', { item });
     };
-
 
     renderItem = ({ item }) => {
         return (

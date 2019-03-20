@@ -17,6 +17,36 @@ export default class PasswordScreen extends React.Component {
         })
     }
 
+
+    onLogin = () => {
+        const { navigation } = this.props;
+
+        const Account = {
+            username: this.state.mUserName,
+            password: this.state.mPassword
+        };
+
+        login(Account).then((data) => {
+
+            console.log("Password screen OnLogin : " + Account.username);
+            console.log("Password screen OnLogin : " + Account.password);
+            if (data != null) {
+                // console.log(data);
+                this.setState({
+                    mAccessToken: data.accessToken
+                })
+
+                //  this.storeData();
+                this.signInAsync();
+                navigation.navigate('Home', { Acc: Account });
+            } else {
+                console.log("Code : 999");
+                Alert.alert("Password ???");
+            }
+        });
+
+    }
+
     inputPass = (text) => {
         this.setState({
             mPassword: text
@@ -48,35 +78,6 @@ export default class PasswordScreen extends React.Component {
 
     };
 
-    onLogin = () => {
-        const { navigation } = this.props;
-
-        const Account = {
-            username: this.state.mUserName,
-            password: this.state.mPassword
-        };
-
-        login(Account).then((data) => {
-
-            console.log("Password screen OnLogin : " + Account.username);
-            console.log("Password screen OnLogin : " + Account.password);
-            if (data != null) {
-                // console.log(data);
-                this.setState({
-                    mAccessToken: data.accessToken
-                })
-
-                //  this.storeData();
-                this.signInAsync();
-                navigation.navigate('Home', { Acc: Account });
-            } else {
-                console.log("Code : 999");
-                Alert.alert("Password ???");
-            }
-        });
-
-    }
-
     render() {
         const { navigation } = this.props;
         return (
@@ -105,7 +106,6 @@ export default class PasswordScreen extends React.Component {
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
-
         );
     }
 }

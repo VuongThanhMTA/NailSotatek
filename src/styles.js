@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     container: {
+        flex: 1,
         alignItems: "center",
     },
     inputContainer: {
@@ -51,8 +52,14 @@ const styles = StyleSheet.create({
 
         width: 30,
         height: 30,
-        borderRadius: 15
-
+        borderRadius: 15,
+    },
+    avatarCircleB: {
+        alignItems: "center",
+        justifyContent: "center",
+        width: 100,
+        height: 100,
+        borderRadius: 50,
     },
     itemText: {
         padding: 3,
@@ -69,6 +76,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         right: 36
+    },
+    textProfile: {
+        flex: 1,
+        //flexDirection: 'row',
+        marginLeft: 10,
+        justifyContent: "center"
     }
+
+
 });
 export default styles 
