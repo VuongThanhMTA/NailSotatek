@@ -1,31 +1,34 @@
 import React from 'react';
+import styles from './src/styles';
+import HomeScreen from './src/screen/HomeScreen';
+import MyWebScreen from './src/screen/WebViewScreen';
+import NotificationScreen from './src/screen/NotificationScreen';
+import ProfileScreen from './src/screen/ProfileScreen';
+import StoreScreen from './src/screen/StoreScreen';
+import UserNameScreen from './src/screen/UserNameScreen';
+import PasswordScreen from './src/screen/PasswordScreen';
+import RegisterScreen from './src/screen/RegisterScreen';
+import AsyncStorage from '@react-native-community/async-storage';
+import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import {
   ActivityIndicator,
   StatusBar,
   View,
-  Image
+  Image,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import styles from './src/styles';
-import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import HomeScreen from './src/screen/HomeScreen'
-import MyWebScreen from './src/screen/WebViewScreen'
-import FavoriteScreen from './src/screen/FavoriteScreen'
-import ProfileScreen from './src/screen/ProfileScreen'
-import UserNameScreen from './src/screen/UserNameScreen'
-import PasswordScreen from './src/screen/PasswordScreen'
-import RegisterScreen from './src/screen/RegisterScreen'
+
 
 class AuthLoadingScreen extends React.Component {
+
   constructor() {
     super();
-    this._bootstrapAsync();
+    this.bootstrapAsync();
   }
-  _bootstrapAsync = async () => {
+
+  bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('@AccessToken:key');
     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
-
   // Render any loading content that you like here
   render() {
     return (
@@ -43,27 +46,41 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: '',
       tabBarIcon: ({ focused, tintColor }) => (
-        focused ? <Image
-          source={require('./src/images/houseBlack24.png')}
-          style={[styles.icon, { tintColor: tintColor }]}
-        /> : <Image
-            source={require('./src/images/housePink24.png')}
-            style={[styles.icon, { tintColor: tintColor }]}
-          />)
+        focused ?
+        <View style={styles.iconHomeActive}>
+          <Image source={require('./src/images/tab_Home/tab_home.png')} />
+        </View> :
+        <View style={styles.iconTabBar}>
+          <Image source={require('./src/images/tab_Home/tab_home_active.png')} />
+        </View>)
     }
   },
-  Favorite: {
-    screen: FavoriteScreen,
+  Notifi: {
+    screen: NotificationScreen,
     navigationOptions: {
       tabBarLabel: '',
       tabBarIcon: ({ focused, tintColor }) => (
-        focused ? <Image
-          source={require('./src/images/heartBlack24.png')}
-          style={[styles.icon, { tintColor: tintColor }]}
-        /> : <Image
-            source={require('./src/images/heartPink24.png')}
-            style={[styles.icon, { tintColor: tintColor }]}
-          />)
+        focused ?
+          <View style={styles.iconNotiActive}>
+            <Image source={require('./src/images/tab_noti/tab_noti.png')} />
+          </View> :
+          <View style={styles.iconTabBar}>
+            <Image source={require('./src/images/tab_noti/tab_noti_active.png')} />
+          </View>)
+    }
+  },
+  Store: {
+    screen: StoreScreen,
+    navigationOptions: {
+      tabBarLabel: '',
+      tabBarIcon: ({ focused, tintColor }) => (
+        focused ?
+          <View style={styles.iconStoreActive}>
+            <Image source={require('./src/images/tab_location/tab_location.png')} />
+          </View> :
+          <View style={styles.iconTabBar}>
+            <Image source={require('./src/images/tab_location/tab_location_active.png')} />
+          </View>)
     }
   },
   Profile: {
@@ -71,13 +88,13 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: '',
       tabBarIcon: ({ focused, tintColor }) => (
-        focused ? <Image
-          source={require('./src/images/avatarBlack24.png')}
-          style={[styles.icon, { tintColor: tintColor }]}
-        /> : <Image
-            source={require('./src/images/avatarPink24.png')}
-            style={[styles.icon, { tintColor: tintColor }]}
-          />)
+        focused ?
+          <View style={styles.iconUserActive}>
+            <Image source={require('./src/images/tab_user/tab_user.png')} />
+          </View> :
+          <View style={styles.iconTabBar}>
+            <Image source={require('./src/images/tab_user/tab_user_active.png')} />
+          </View>)
     }
   },
 }, {
@@ -89,10 +106,10 @@ const TabNavigator = createBottomTabNavigator({
         fontSize: 0,
       },
       tabStyle: {
-        width: 100,
+        width: styles.width,
       },
       style: {
-        backgroundColor: '#f44336',
+        backgroundColor: '#FFFFFF',
       },
     },
   });

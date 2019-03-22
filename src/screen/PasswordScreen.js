@@ -5,7 +5,9 @@ import styles from '../styles';
 import { login } from '../networking/Server';
 import imageBG from '../images/nailbg.jpg';
 import Icon from 'react-native-ionicons'
-export default class PasswordScreen extends React.Component {
+
+
+export default class PasswordScreen extends Component {
     constructor(props) {
         super(props);
         this.state = ({

@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import styles from '../styles';
 import {
   Text, View, TextInput,
-  TouchableOpacity, ImageBackground, Dimensions
+  TouchableOpacity, ImageBackground
 } from 'react-native';
 import imageBG from '../images/nailbg.jpg';
 import { checkIfAccExists } from '../networking/Server';
 import Icon from 'react-native-ionicons'
 
 
-export default class UserNameScreen extends React.Component {
+export default class UserNameScreen extends Component {
 
   constructor(props) {
     super(props);
   }
-
+  // các biến đặt tên : chữ cái đầu thường : mVar
+  // các funtion private nên gạch dưới _onNext
   onNext = () => {
     const { navigation } = this.props;
     const userName = { username: this.text._lastNativeText };

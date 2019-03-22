@@ -5,7 +5,7 @@ import {
     Text, View, FlatList, TouchableOpacity, Image
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { getAllNewsFromServer, getProfile } from '../networking/Server';
+import { getAllNewsFromServer, getProfileFromServer } from '../networking/Server';
 import NewsItem from '../flatList/NewsItem';
 
 export default class HomeScreen extends Component {
@@ -20,10 +20,10 @@ export default class HomeScreen extends Component {
 
     componentDidMount() {
         this.refreshDataFromServer();
-        this._getProfile();
+        this.getProfile();
     }
 
-    _getProfile = async () => {
+    getProfile = async () => {
         await AsyncStorage.multiGet(['@UserName:key', '@Password:key']).then(response => {
             console.log(response)
             this.setState({
@@ -37,7 +37,7 @@ export default class HomeScreen extends Component {
             password: this.state.mPass
         };
 
-        getProfile(Account).then((data) => {
+        getProfileFromServer(Account).then((data) => {
             this.setState({
                 phone: data.user.phone,
                 avatar: data.user.avatar
@@ -60,6 +60,8 @@ export default class HomeScreen extends Component {
         const { navigation } = this.props;
         navigation.navigate('WebView', { item });
     };
+    onClickAvatar = () => {
+    };
 
     renderItem = ({ item }) => {
         return (
@@ -67,8 +69,6 @@ export default class HomeScreen extends Component {
                 onPressItem={() => { this._onPressItem(item) }} />
         );
     }
-    onClickAvatar = () => {
-    };
 
     render() {
         return (

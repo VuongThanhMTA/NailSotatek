@@ -1,7 +1,7 @@
 
 
 import { StyleSheet, Dimensions } from 'react-native';
-const { width: WIDTH } = Dimensions.get('window');
+const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     backgroundContainer: {
@@ -77,13 +77,78 @@ const styles = StyleSheet.create({
         top: 10,
         right: 36
     },
-    textProfile: {
+    containerTopProfile: {
+        flex: 2,
+        padding: 20,
+        backgroundColor: "#FFFFFF",
+    },
+    containerBottomProfile: {
+        flex: 3,
+        paddingRight: 10
+    },
+    containerTouchable: {
         flex: 1,
-        //flexDirection: 'row',
-        marginLeft: 10,
-        justifyContent: "center"
+        flexDirection: 'row',
+        alignItems: "center",
+        //  justifyContent: "center"
+    },
+    textTouchable: {
+        flex: 3,
+        fontSize: 16,
+        paddingLeft: 10,
+        alignItems: "center",
+    },
+    textLogout: {
+        flex: 3,
+        fontSize: 16,
+        paddingLeft: 10,
+        alignItems: "center",
+        color: "#ff8a80"
+    },
+    touchableProfile: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: .5,
+        borderColor: '#fff',
+        right: 10
+    },
+    iconTabBar: {
+        backgroundColor: "#FFFFFF",
+
+    },
+    iconHomeActive: {
+        paddingLeft: 20,
+        alignItems: 'center',
+        justifyContent: "center",
+        backgroundColor: "#8BC34A",
+        width: WIDTH * 2 / 5,
+        height: 40,
+        borderRadius: 20
+    },
+    iconNotiActive: {
+        paddingLeft: 20,
+        justifyContent: "center",
+        backgroundColor: "#1976D2",
+        width: WIDTH * 2 / 5,
+        height: 40,
+        borderRadius: 20
+    },
+    iconUserActive: {
+        paddingLeft: 20,
+        justifyContent: "center",
+        backgroundColor: "#F06292",
+        width: WIDTH * 2 / 5,
+        height: 40,
+        borderRadius: 20
+    },
+    iconStoreActive: {
+        paddingLeft: 20,
+        justifyContent: "center",
+        backgroundColor: "#F9A825",
+        width: WIDTH * 2 / 5,
+        height: 40,
+        borderRadius: 20
     }
-
-
 });
 export default styles 

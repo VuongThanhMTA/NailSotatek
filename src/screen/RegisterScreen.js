@@ -9,6 +9,7 @@ import { register } from '../networking/Server';
 
 
 export default class RegisterScreen extends Component {
+    
     constructor(props) {
         super(props);
         this.state = ({
