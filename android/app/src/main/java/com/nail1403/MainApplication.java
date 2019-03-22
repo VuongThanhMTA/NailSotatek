@@ -29,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
             new AsyncStoragePackage(),
             new RNCWebViewPackage(),
             new RNGestureHandlerPackage()
+            
       );
     }
 

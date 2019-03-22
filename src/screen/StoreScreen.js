@@ -18,11 +18,11 @@ export default class StoreScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <MapView
+        {/* <MapView
           style={{ flex: 1 }}
           region={this.state.region}>
 
-        </MapView>
+        </MapView> */}
       </View>
     );
   }

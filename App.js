@@ -9,7 +9,7 @@ import UserNameScreen from './src/screen/UserNameScreen';
 import PasswordScreen from './src/screen/PasswordScreen';
 import RegisterScreen from './src/screen/RegisterScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import { createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator,createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import {
   ActivityIndicator,
   StatusBar,
