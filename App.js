@@ -9,12 +9,13 @@ import UserNameScreen from './src/screen/UserNameScreen';
 import PasswordScreen from './src/screen/PasswordScreen';
 import RegisterScreen from './src/screen/RegisterScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import { createMaterialTopTabNavigator,createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator, createStackNavigator, createSwitchNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import {
   ActivityIndicator,
   StatusBar,
   View,
   Image,
+  Text
 } from 'react-native';
 
 
@@ -44,25 +45,25 @@ const TabNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      tabBarLabel: '',
       tabBarIcon: ({ focused, tintColor }) => (
         focused ?
-        <View style={styles.iconHomeActive}>
-          <Image source={require('./src/images/tab_Home/tab_home.png')} />
-        </View> :
-        <View style={styles.iconTabBar}>
-          <Image source={require('./src/images/tab_Home/tab_home_active.png')} />
-        </View>)
+          <View style={styles.iconHomeActive}>
+            <Image source={require('./src/images/tab_Home/tab_home.png')} />
+            <Text style={{ paddingLeft: 4, color: "white" }}>Home</Text>
+          </View> :
+          <View style={styles.iconTabBar}>
+            <Image source={require('./src/images/tab_Home/tab_home_active.png')} />
+          </View>)
     }
   },
   Notifi: {
     screen: NotificationScreen,
     navigationOptions: {
-      tabBarLabel: '',
       tabBarIcon: ({ focused, tintColor }) => (
         focused ?
           <View style={styles.iconNotiActive}>
             <Image source={require('./src/images/tab_noti/tab_noti.png')} />
+            <Text style={{ paddingLeft: 4, color: "white" }}>Noti</Text>
           </View> :
           <View style={styles.iconTabBar}>
             <Image source={require('./src/images/tab_noti/tab_noti_active.png')} />
@@ -72,11 +73,11 @@ const TabNavigator = createBottomTabNavigator({
   Store: {
     screen: StoreScreen,
     navigationOptions: {
-      tabBarLabel: '',
       tabBarIcon: ({ focused, tintColor }) => (
         focused ?
           <View style={styles.iconStoreActive}>
             <Image source={require('./src/images/tab_location/tab_location.png')} />
+            <Text style={{ paddingLeft: 4, color: "white" }}>Store</Text>
           </View> :
           <View style={styles.iconTabBar}>
             <Image source={require('./src/images/tab_location/tab_location_active.png')} />
@@ -86,25 +87,26 @@ const TabNavigator = createBottomTabNavigator({
   Profile: {
     screen: ProfileScreen,
     navigationOptions: {
-      tabBarLabel: '',
+      //title: 'Account',
       tabBarIcon: ({ focused, tintColor }) => (
         focused ?
           <View style={styles.iconUserActive}>
             <Image source={require('./src/images/tab_user/tab_user.png')} />
+            <Text style={{ paddingLeft: 4, color: "white" }}>Account</Text>
           </View> :
           <View style={styles.iconTabBar}>
             <Image source={require('./src/images/tab_user/tab_user_active.png')} />
           </View>)
     }
   },
-}, {
+},
+  {
+    //headerMode: 'none',
     tabBarOptions: {
       activeTintColor: '#ffffff',
       inactiveTintColor: '#000000',
       scrollEnabled: true,
-      labelStyle: {
-        fontSize: 0,
-      },
+      showLabel: false,
       tabStyle: {
         width: styles.width,
       },
@@ -118,14 +120,22 @@ const TabNavigator = createBottomTabNavigator({
 
 const AppStack = createStackNavigator(
   {
-    Tab: TabNavigator,
-    WebView: MyWebScreen
+    Tab: {
+      screen: TabNavigator,
+      navigationOptions: {
+        //  title: "Tab"
+      }
+    },
+    WebView: {
+      screen: MyWebScreen,
+      navigationOptions: {
+        title: 'Nail'
+      }
+    }
   },
   {
     initialRouteName: "Tab",
-    defaultNavigationOptions: {
-      header: null
-    },
+    headerMode: 'none'
   }
 );
 const AuthStack = createStackNavigator(
@@ -137,9 +147,7 @@ const AuthStack = createStackNavigator(
   },
   {
     initialRouteName: "UserName",
-    defaultNavigationOptions: {
-      header: null
-    },
+    headerMode: 'none',
   }
 );
 
@@ -151,5 +159,6 @@ export default createAppContainer(createSwitchNavigator(
   },
   {
     initialRouteName: 'AuthLoading',
+    // headerMode: 'none',
   }
 ));

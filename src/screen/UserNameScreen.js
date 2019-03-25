@@ -11,6 +11,10 @@ import Icon from 'react-native-ionicons'
 
 export default class UserNameScreen extends Component {
 
+  static navigationOptions = {
+    headerTitle:'Home',
+  }
+
   constructor(props) {
     super(props);
   }

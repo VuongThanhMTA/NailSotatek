@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styles from '../styles';
 import { Text, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import Header from './CustomHeader'
+
 export default class StoreScreen extends Component {
   constructor(props) {
     super(props);
@@ -18,11 +20,7 @@ export default class StoreScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <MapView
-          style={{ flex: 1 }}
-          region={this.state.region}>
-
-        </MapView> */}
+        <Header title="Store" color="#F9A825"/>
       </View>
     );
   }

@@ -7,6 +7,8 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import { getAllNewsFromServer, getProfileFromServer } from '../networking/Server';
 import NewsItem from '../flatList/NewsItem';
+import Header from './CustomHeader';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class HomeScreen extends Component {
     constructor(props) {
@@ -72,17 +74,35 @@ export default class HomeScreen extends Component {
 
     render() {
         return (
+
             <View style={{ flex: 1, flexDirection: 'column' }}>
-                <View style={{ paddingLeft: 10, height: 50, backgroundColor: 'white' }}>
+                <Header title="Home" color="#8BC34A" />
+                <View style={{ flexDirection: 'row', paddingLeft: 10, height: 50, backgroundColor: 'white' }}>
                     <Image style={styles.avatarCircle} source={{ uri: this.state.avatar }} />
-                    <TouchableOpacity onPress={this.onClickAvatar}>
-                        <Text>{this.state.phone}</Text></TouchableOpacity>
+                    <TouchableOpacity style={{ paddingLeft: 10 }} onPress={this.onClickAvatar}>
+                        <Text >Name</Text>
+                        <Text >Membership</Text>
+                    </TouchableOpacity>
                 </View>
-                <FlatList style={{ flex: 1 }}
-                    data={this.state.newsFromServer}
-                    renderItem={this.renderItem}
-                    keyExtractor={(item) => item._id}
-                />
+                <ScrollView style={{ flex: 1 }}>
+                    <View style={styles.container3Btn}>
+                        <TouchableOpacity style={styles.buttonBooking}>
+                            <Image  source={require("../images/ic_book/calendar2x.png")}></Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonBooking}>
+                            <Image  source={require("../images/ic_coupon/coupon2x.png")}></Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonBooking}>
+                            <Image  source={require("../images/ic_qr_code/qr-code2x.png")}></Image>
+                        </TouchableOpacity>
+
+                    </View>
+                    <FlatList style={{ flex: 1 }}
+                        data={this.state.newsFromServer}
+                        renderItem={this.renderItem}
+                        keyExtractor={(item) => item._id}
+                    />
+                </ScrollView>
 
             </View>
         );

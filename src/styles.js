@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginTop: 10
     },
+    headerStyle: {
+        height: 56, width: '100%',
+        backgroundColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     inputBox: {
         width: WIDTH - 55,
         height: 45,
@@ -50,9 +56,9 @@ const styles = StyleSheet.create({
     },
     avatarCircle: {
 
-        width: 30,
-        height: 30,
-        borderRadius: 15,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
     },
     avatarCircleB: {
         alignItems: "center",
@@ -106,18 +112,20 @@ const styles = StyleSheet.create({
         color: "#ff8a80"
     },
     touchableProfile: {
+        margin: 5,
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: .5,
-        borderColor: '#fff',
-        right: 10
+        // borderWidth: .5,
+        // borderColor: '#fff',
+        // right: 10
     },
     iconTabBar: {
         backgroundColor: "#FFFFFF",
 
     },
     iconHomeActive: {
+        flexDirection: "row",
         paddingLeft: 20,
         alignItems: 'center',
         justifyContent: "center",
@@ -127,28 +135,59 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
     iconNotiActive: {
+        flexDirection: "row",
         paddingLeft: 20,
         justifyContent: "center",
+        alignItems: 'center',
         backgroundColor: "#1976D2",
         width: WIDTH * 2 / 5,
         height: 40,
         borderRadius: 20
     },
     iconUserActive: {
+        flexDirection: "row",
         paddingLeft: 20,
         justifyContent: "center",
+        alignItems: 'center',
         backgroundColor: "#F06292",
         width: WIDTH * 2 / 5,
         height: 40,
         borderRadius: 20
     },
     iconStoreActive: {
+        flexDirection: "row",
         paddingLeft: 20,
         justifyContent: "center",
+        alignItems: 'center',
         backgroundColor: "#F9A825",
         width: WIDTH * 2 / 5,
         height: 40,
         borderRadius: 20
+    },
+
+    container3Btn: {
+         alignItems: 'center',
+         justifyContent: 'center',
+        height: WIDTH / 4,
+        width: WIDTH,
+        flexDirection: 'row',
+        margin: 10,
+       // padding:15
+    },
+    buttonBooking: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: WIDTH / 4,
+        margin:5,
+        height: WIDTH / 4,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 6,
+        borderWidth: 1,
+        borderColor: "#9E9E9E",
     }
+
+
+
+
 });
 export default styles 
