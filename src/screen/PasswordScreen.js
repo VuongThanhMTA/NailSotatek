@@ -20,18 +20,18 @@ export default class PasswordScreen extends Component {
     }
 
 
-    onLogin = () => {
+    _onLogin = () => {
         const { navigation } = this.props;
 
-        const Account = {
+        const account = {
             username: this.state.mUserName,
             password: this.state.mPassword
         };
 
-        login(Account).then((data) => {
+        login(account).then((data) => {
 
-            console.log("Password screen OnLogin : " + Account.username);
-            console.log("Password screen OnLogin : " + Account.password);
+            console.log("Password screen OnLogin : " + account.username);
+            console.log("Password screen OnLogin : " + account.password);
             if (data != null) {
                 // console.log(data);
                 this.setState({
@@ -39,8 +39,8 @@ export default class PasswordScreen extends Component {
                 })
 
                 //  this.storeData();
-                this.signInAsync();
-                navigation.navigate('Home', { Acc: Account });
+                this._signInAsync();
+                navigation.navigate('Home', { Acc: account });
             } else {
                 console.log("Code : 999");
                 Alert.alert("Password ???");
@@ -49,13 +49,13 @@ export default class PasswordScreen extends Component {
 
     }
 
-    inputPass = (text) => {
+    _inputPass = (text) => {
         this.setState({
             mPassword: text
         })
     }
 
-    onShowPass = () => {
+    _onShowPass = () => {
         if (this.state.isPress == false) {
             console.log(" eye : false");
             this.setState({ showPass: false, isPress: true })
@@ -65,7 +65,7 @@ export default class PasswordScreen extends Component {
         }
     }
 
-    signInAsync = async () => {
+    _signInAsync = async () => {
         console.log("Password screen AsyncStorage: " + this.state.mAccessToken);
         console.log("Password screen AsyncStorage : " + this.state.mUserName);
         console.log("Password screen AsyncStorage : " + this.state.mPassword);
@@ -91,12 +91,12 @@ export default class PasswordScreen extends Component {
                 <View style={styles.inputContainer}>
                     <Icon style={styles.iconInput} name="md-lock" color="#455A64" size={22} />
                     <TextInput
-                        onChangeText={this.inputPass}
+                        onChangeText={this._inputPass}
                         style={styles.inputBox}
                         secureTextEntry={this.state.showPass}
                         placeholder="Password">
                     </TextInput>
-                    <TouchableOpacity style={styles.iconEye} onPress={this.onShowPass}>
+                    <TouchableOpacity style={styles.iconEye} onPress={this._onShowPass}>
                         <Image source={this.state.isPress == false ? require('../images/eyeBlack24.png') : require('../images/eyeOffBlack24.png')} />
                         {/* <Text>eye</Text> */}
                         {/* <Icon style={styles.iconInput} name={this.state.isPress == false ? "md-eye" : "md-eye-off"} color="#FFFFFF" size={22} /> */}
@@ -104,7 +104,7 @@ export default class PasswordScreen extends Component {
                 </View>
                 <View style={styles.inputContainer}>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText} onPress={this.onLogin} >Login</Text>
+                        <Text style={styles.buttonText} onPress={this._onLogin} >Login</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>

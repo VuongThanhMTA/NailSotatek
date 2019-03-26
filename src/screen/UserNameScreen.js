@@ -11,21 +11,17 @@ import Icon from 'react-native-ionicons'
 
 export default class UserNameScreen extends Component {
 
-  static navigationOptions = {
-    headerTitle:'Home',
-  }
-
   constructor(props) {
     super(props);
   }
   // các biến đặt tên : chữ cái đầu thường : mVar
   // các funtion private nên gạch dưới _onNext
-  onNext = () => {
+  _onNext = () => {
     const { navigation } = this.props;
     const userName = { username: this.text._lastNativeText };
 
     checkIfAccExists(userName).then((data) => {
-      // console.log(data.exists)
+       console.log(data)
       console.log(userName.username)
       if (data.exists === true) {
         console.log(" exists : true")
@@ -49,7 +45,7 @@ export default class UserNameScreen extends Component {
             placeholder="User name"></TextInput>
         </View>
         <View style={styles.inputContainer}>
-          <TouchableOpacity style={styles.button} onPress={this.onNext}>
+          <TouchableOpacity style={styles.button} onPress={this._onNext}>
             <Text style={styles.buttonText} >Next</Text>
           </TouchableOpacity>
         </View>

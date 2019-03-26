@@ -18,6 +18,19 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginTop: 10
     },
+    containerMembership: {
+
+        alignItems: "center",
+        flexDirection: 'row',
+        paddingLeft: 10, height: 60,
+        backgroundColor: 'white',
+        shadowColor: '#000',
+        shadowOffset: { width: 5, height: 5 },
+        shadowOpacity: 1,
+        shadowRadius: 8,
+        elevation: 3
+    },
+
     headerStyle: {
         height: 56, width: '100%',
         backgroundColor: '#FFFFFF',
@@ -166,24 +179,29 @@ const styles = StyleSheet.create({
     },
 
     container3Btn: {
-         alignItems: 'center',
-         justifyContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: WIDTH / 4,
         width: WIDTH,
         flexDirection: 'row',
         margin: 10,
-       // padding:15
+        // padding:15
     },
     buttonBooking: {
         alignItems: 'center',
         justifyContent: 'center',
         width: WIDTH / 4,
-        margin:5,
+        margin: 5,
         height: WIDTH / 4,
         backgroundColor: "#FFFFFF",
         borderRadius: 6,
         borderWidth: 1,
         borderColor: "#9E9E9E",
+       // shadowColor: '#000',
+      //  shadowOffset: { width: 15, height: 15 },
+        shadowOpacity: 0.7,
+        shadowRadius: 5,
+        elevation: 3
     }
 
 

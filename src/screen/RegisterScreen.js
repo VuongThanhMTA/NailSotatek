@@ -13,23 +13,23 @@ export default class RegisterScreen extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-            Name: "",
-            Pass: "",
+            mName: "",
+            mPass: "",
             showPass: true,
             isPress: false,
 
         })
     }
 
-    onInputName = (text) => {
-        this.setState({ Name: text })
+    _onInputName = (text) => {
+        this.setState({ mName: text })
     }
 
-    onInputPass = (text) => {
-        this.setState({ Pass: text })
+    _onInputPass = (text) => {
+        this.setState({ mPass: text })
     }
 
-    onShowPass = () => {
+    _onShowPass = () => {
         if (this.state.isPress == false) {
             console.log(" eye : false");
             this.setState({ showPass: false, isPress: true })
@@ -38,18 +38,18 @@ export default class RegisterScreen extends Component {
             this.setState({ showPass: true, isPress: false })
         }
     }
-    onRegister = () => {
+    _onRegister = () => {
         const { navigation } = this.props;
 
-        console.log("User register : ", this.state.Name)
-        console.log("Pass register : ", this.state.Pass)
+        console.log("User register : ", this.state.mName)
+        console.log("Pass register : ", this.state.mPass)
 
-        const Account = {
-            username: this.state.Name,
-            password: this.state.Pass
+        const account = {
+            username: this.state.mName,
+            password: this.state.mPass
         };
 
-        register(Account).then((result) => {
+        register(account).then((result) => {
             console.log("register : ", result)
             if (result === 0) {
                 navigation.navigate('UserName');
@@ -69,8 +69,8 @@ export default class RegisterScreen extends Component {
                 <View style={styles.inputContainer}>
                     <Icon name="md-person" size={28} color={'rgba(255,255,255,0.7)'} style={styles.iconInput} />
                     <TextInput
-                        onChangeText={this.onInputName}
-                        value={this.state.Name}
+                        onChangeText={this._onInputName}
+                        value={this.state.mName}
                         style={styles.inputBox}
                         placeholder="User name">
                     </TextInput>
@@ -78,22 +78,19 @@ export default class RegisterScreen extends Component {
                 <View style={styles.inputContainer}>
                     <Icon name="md-lock" size={28} color={'rgba(255,255,255,0.7)'} style={styles.iconInput} />
                     <TextInput
-
-                        // value={this.state.Password}
-                        onChangeText={this.onInputPass}
+                        onChangeText={this._onInputPass}
                         style={styles.inputBox}
                         placeholder="Password"
                         secureTextEntry={this.state.showPass}>
                     </TextInput>
-                    <TouchableOpacity style={styles.iconEye} onPress={this.onShowPass}>
+                    <TouchableOpacity style={styles.iconEye} onPress={this._onShowPass}>
                         <Image source={this.state.isPress == false ? require('../images/eyeBlack24.png') : require('../images/eyeOffBlack24.png')} />
-                        {/* <Text>eye</Text> */}
-                        {/* <Icon style={styles.iconInput} name={this.state.isPress == false ? "md-eye" : "md-eye-off"} color="#FFFFFF" size={22} /> */}
+                       
                     </TouchableOpacity>
                 </View>
                 <View style={styles.inputContainer}>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText} onPress={this.onRegister} >Register</Text>
+                        <Text style={styles.buttonText} onPress={this._onRegister} >Register</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>

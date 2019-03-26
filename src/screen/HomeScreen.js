@@ -21,11 +21,11 @@ export default class HomeScreen extends Component {
     }
 
     componentDidMount() {
-        this.refreshDataFromServer();
-        this.getProfile();
+        this._refreshDataFromServer();
+        this._getProfile();
     }
 
-    getProfile = async () => {
+    _getProfile = async () => {
         await AsyncStorage.multiGet(['@UserName:key', '@Password:key']).then(response => {
             console.log(response)
             this.setState({
@@ -34,12 +34,12 @@ export default class HomeScreen extends Component {
             })
         });
 
-        const Account = {
+        const account = {
             username: this.state.mUser,
             password: this.state.mPass
         };
 
-        getProfileFromServer(Account).then((data) => {
+        getProfileFromServer(account).then((data) => {
             this.setState({
                 phone: data.user.phone,
                 avatar: data.user.avatar
@@ -49,7 +49,7 @@ export default class HomeScreen extends Component {
         });
     }
 
-    refreshDataFromServer = () => {
+    _refreshDataFromServer = () => {
         getAllNewsFromServer().then((news) => {
             this.setState({ newsFromServer: news });
         }).catch((error) => {
@@ -62,7 +62,7 @@ export default class HomeScreen extends Component {
         const { navigation } = this.props;
         navigation.navigate('WebView', { item });
     };
-    onClickAvatar = () => {
+    _onClickAvatar = () => {
     };
 
     renderItem = ({ item }) => {
@@ -77,7 +77,7 @@ export default class HomeScreen extends Component {
 
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Header title="Home" color="#8BC34A" />
-                <View style={{ flexDirection: 'row', paddingLeft: 10, height: 50, backgroundColor: 'white' }}>
+                <View style={styles.containerMembership}>
                     <Image style={styles.avatarCircle} source={{ uri: this.state.avatar }} />
                     <TouchableOpacity style={{ paddingLeft: 10 }} onPress={this.onClickAvatar}>
                         <Text >Name</Text>
@@ -87,13 +87,13 @@ export default class HomeScreen extends Component {
                 <ScrollView style={{ flex: 1 }}>
                     <View style={styles.container3Btn}>
                         <TouchableOpacity style={styles.buttonBooking}>
-                            <Image  source={require("../images/ic_book/calendar2x.png")}></Image>
+                            <Image source={require("../images/ic_book/calendar2x.png")}></Image>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonBooking}>
-                            <Image  source={require("../images/ic_coupon/coupon2x.png")}></Image>
+                            <Image source={require("../images/ic_coupon/coupon2x.png")}></Image>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonBooking}>
-                            <Image  source={require("../images/ic_qr_code/qr-code2x.png")}></Image>
+                            <Image source={require("../images/ic_qr_code/qr-code2x.png")}></Image>
                         </TouchableOpacity>
 
                     </View>
