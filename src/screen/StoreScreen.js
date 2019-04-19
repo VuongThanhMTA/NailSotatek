@@ -17,6 +17,7 @@ export default class StoreScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            animScroll: new Animated.Value(0),
             markerFromServer: [],
             locationResult: null,
 
@@ -48,7 +49,7 @@ export default class StoreScreen extends React.Component {
 
         navigator.geolocation.getCurrentPosition(
             (position) => {
-               // console.log("Position : ", position);
+                // console.log("Position : ", position);
                 this.setState(
                     {
                         location: {
@@ -113,11 +114,41 @@ export default class StoreScreen extends React.Component {
 
     }
     _renderMarker = () => {
+        const interpolations = this.state.markerFromServer.map((marker, index) => {
+            const inputRange = [
+                (index - 1) * CARD_WIDTH,
+                index * CARD_WIDTH,
+                ((index + 1) * CARD_WIDTH),
+            ];
+            const scale = this.state.animScroll.interpolate({
+                inputRange,
+                outputRange: [1, 1.5, 1],
+                extrapolate: "clamp",
+            });
+            const opacity = this.state.animScroll.interpolate({
+                inputRange,
+                outputRange: [0.35, 1, 0.35],
+                extrapolate: "clamp",
+            });
+            return { scale, opacity };
+        });
         return (
             <View>
                 {
                     this.state.markerFromServer.map((marker, index) => {
+                        const scaleStyle = {
+                            transform: [
+                                {
+                                    scale: interpolations[index].scale,
+                                },
+                            ],
+                        };
+                        const opacityStyle = {
+                            opacity: interpolations[index].opacity,
+                        };
+
                         return (
+
                             <MapView.Marker
                                 onPress={() => this._onMarkerPress(marker.lat, marker.long)}
                                 key={index}
@@ -127,7 +158,16 @@ export default class StoreScreen extends React.Component {
                                 }}
                                 title={marker.name}
                                 description={marker.address}
-                            />
+                                style={{ alignItems: 'flex-end' }}
+                            >
+                                <Animated.View style={[styles.markerWrap, scaleStyle]}>
+                                    <Animated.Image
+                                        source={require('../../assets/Assets.xcassets/tab_location_active.imageset/tab_location_active.png')}
+                                    //style={[styles.markerWrap, scaleStyle]}
+                                    />
+                                </Animated.View>
+
+                            </MapView.Marker>
                         )
                     })
                 }
@@ -139,7 +179,8 @@ export default class StoreScreen extends React.Component {
 
 
     render() {
-     
+
+
         return (
             <View style={{ flex: 1 }}>
                 <MapView
@@ -170,7 +211,19 @@ export default class StoreScreen extends React.Component {
                     showsHorizontalScrollIndicator={false}
                     // snapToInterval={CARD_WIDTH}
                     style={styles.scrollView}
-                    contentContainerStyle={styles.endPadding}>
+                    contentContainerStyle={styles.endPadding}
+                    onScroll={Animated.event(
+                        [
+                            {
+                                nativeEvent: {
+                                    contentOffset: {
+                                        x: this.state.animScroll
+                                    }
+                                }
+                            }
+                        ], { useNativeDriver: true })
+                    }
+                >
                     {
                         this.state.markerFromServer.map((marker, index) => {
                             return (
@@ -239,13 +292,16 @@ const styles = StyleSheet.create({
         color: "#444",
     },
     markerWrap: {
-        alignItems: "center",
+        width: 40,
+        height: 50,
         justifyContent: "center",
+        alignItems: 'center'
+
     },
     marker: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
+        width: 20,
+        height: 20,
+        borderRadius: 10,
         backgroundColor: "rgba(130,4,150, 0.9)",
     },
     ring: {
