@@ -1,4 +1,29 @@
 {
-  "name": "Nail1403",
-  "displayName": "Nail1403"
+  "expo": {
+    "name": "NailEverly29",
+    "slug": "NailEverly29",
+    "privacy": "public",
+    "sdkVersion": "32.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/Assets.xcassets/ic_app.imageset/ic_app3x.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ff5252"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
 }

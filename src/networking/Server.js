@@ -1,17 +1,16 @@
 
 // domain chung khác đuôi
-
+const domain = 'http://18.234.222.106:3011/';
 const apiGetAllNews = 'http://18.234.222.106:3011/news';
 const apiLogin = 'http://18.234.222.106:3011/login';
 const apiCheckIfAccExists = 'http://18.234.222.106:3011/exists';
 const apiRegister = 'http://18.234.222.106:3011/register';
 //tạo 1 class  chứa tất cả
+class Server {
 
-//  class Server{
-
-    async function getAllNewsFromServer() {
+    getAllNewsFromServer = async () => {
         try {
-            let response = await fetch(apiGetAllNews);
+            let response = await fetch(domain + 'news');
             let responseJson = await response.json();
             return responseJson.data;
         } catch (error) {
@@ -19,9 +18,9 @@ const apiRegister = 'http://18.234.222.106:3011/register';
         }
     }
 
-    async function checkIfAccExists(params) {
+    checkIfAccExists = async (params) => {
         try {
-            let response = await fetch(apiCheckIfAccExists, {
+            let response = await fetch(domain + 'exists', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -38,9 +37,9 @@ const apiRegister = 'http://18.234.222.106:3011/register';
 
     }
 
-    async function login(params) {
+    login = async (params) => {
         try {
-            let response = await fetch(apiLogin, {
+            let response = await fetch(domain+'login', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -57,9 +56,9 @@ const apiRegister = 'http://18.234.222.106:3011/register';
 
     }
 
-    async function getProfileFromServer(params) {
+    getProfileFromServer = async (params) => {
         try {
-            let response = await fetch(apiLogin, {
+            let response = await fetch(domain+'login', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -76,9 +75,9 @@ const apiRegister = 'http://18.234.222.106:3011/register';
 
     }
 
-    async function register(params) {
+    register = async (params) => {
         try {
-            let response = await fetch(apiRegister, {
+            let response = await fetch(domain+'register', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -94,5 +93,16 @@ const apiRegister = 'http://18.234.222.106:3011/register';
         }
     }
 
-// }
-export { getAllNewsFromServer, checkIfAccExists, login, getProfileFromServer, register };
+    getStores = async () => {
+        try {
+            let response = await fetch(domain + 'stores');
+            let responseJson = await response.json();
+            return responseJson.data;
+        } catch (error) {
+            console.error('Error get stores map : ', { error });
+        }
+    }
+}
+
+const mServer = new Server();
+export default mServer;

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import styles from '../styles';
-import { Text, View, Image } from 'react-native';
-import Header from './CustomHeader'
+import { View, Text, Image } from 'react-native';
+import AppStyle from '../theme'
+
 export default class NotificationScreen extends Component {
+    constructor(props) {
+        super(props)
+    }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header title="Notification" color="#2196F3" />
-        <View style={styles.backgroundContainer}>
-          <Image source={require("../images/empty/empty.png")} />
-        </View>
-
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={AppStyle.StyleMain.centerContainer}>
+                <Image source={require('../../assets/Assets.xcassets/empty.imageset/empty.png')} />
+            </View>
+        );
+    }
 }

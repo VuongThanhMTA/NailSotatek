@@ -1,99 +1,59 @@
 import React, { Component } from 'react';
-import styles from '../styles';
-import {
-    Text, View, TextInput, TouchableOpacity, Alert, ImageBackground, Image
-} from 'react-native';
-import imageBG from '../images/nailbg.jpg';
-import Icon from 'react-native-ionicons'
-import { register } from '../networking/Server';
-
-
+import { View, TouchableOpacity, Text, Image, TextInput, KeyboardAvoidingView } from 'react-native';
+import AppStyle from '../theme';
+import mServer from '../networking/Server';
 export default class RegisterScreen extends Component {
-    
     constructor(props) {
-        super(props);
-        this.state = ({
-            mName: "",
-            mPass: "",
-            showPass: true,
-            isPress: false,
-
-        })
-    }
-
-    _onInputName = (text) => {
-        this.setState({ mName: text })
-    }
-
-    _onInputPass = (text) => {
-        this.setState({ mPass: text })
-    }
-
-    _onShowPass = () => {
-        if (this.state.isPress == false) {
-            console.log(" eye : false");
-            this.setState({ showPass: false, isPress: true })
-        } else {
-            console.log(" eye : true");
-            this.setState({ showPass: true, isPress: false })
+        super(props)
+        this.state = {
+            mUser: null,
+            mPass: null,
+            mToken: null
         }
     }
-    _onRegister = () => {
-        const { navigation } = this.props;
 
-        console.log("User register : ", this.state.mName)
-        console.log("Pass register : ", this.state.mPass)
+    _inputUser = (text) => this.setState({ mUser: text })
+
+    _inputPass = (text) => this.setState({ mPass: text })
+
+    _onRegister = () => {
 
         const account = {
-            username: this.state.mName,
-            password: this.state.mPass
-        };
-
-        register(account).then((result) => {
-            console.log("register : ", result)
+            userName: this.state.mUser,
+            pass: this.state.mPass
+        }
+        mServer.register(account).then((result) => {
             if (result === 0) {
-                navigation.navigate('UserName');
+                navigation.navigate('InputUser');
             } else if (result === 9999) {
-                Alert.alert("999", "User exists")
-                console.log("User exists" + error)
+                Alert.alert("999", "User exists or error")
+              //  console.log("User exists" + error)
             }
-        }).catch((error) => {
-            //  this.setState({ mProfile: null });
-            console.log("Error register " + error)
+
         });
     }
 
     render() {
         return (
-            <ImageBackground source={imageBG} style={styles.backgroundContainer}>
-                <View style={styles.inputContainer}>
-                    <Icon name="md-person" size={28} color={'rgba(255,255,255,0.7)'} style={styles.iconInput} />
+            <View style={AppStyle.StyleMain.centerContainer}>
+                <KeyboardAvoidingView style={AppStyle.StyleMain.centerContainer} behavior="padding">
+                    <Image style={{ marginBottom: 30 }} source={require('../../assets/Assets.xcassets/ic_app.imageset/ic_app.png')} />
+
                     <TextInput
-                        onChangeText={this._onInputName}
-                        value={this.state.mName}
-                        style={styles.inputBox}
-                        placeholder="User name">
-                    </TextInput>
-                </View>
-                <View style={styles.inputContainer}>
-                    <Icon name="md-lock" size={28} color={'rgba(255,255,255,0.7)'} style={styles.iconInput} />
+                        style={AppStyle.StyleCommon.inputRegister}
+                        onChangeText={() => this._inputUser()}
+                        placeholder="User name" />
+
                     <TextInput
-                        onChangeText={this._onInputPass}
-                        style={styles.inputBox}
-                        placeholder="Password"
-                        secureTextEntry={this.state.showPass}>
-                    </TextInput>
-                    <TouchableOpacity style={styles.iconEye} onPress={this._onShowPass}>
-                        <Image source={this.state.isPress == false ? require('../images/eyeBlack24.png') : require('../images/eyeOffBlack24.png')} />
-                       
+                        style={AppStyle.StyleCommon.inputRegister}
+                        onChangeText={() => this._inputPass()}
+                        placeholder="Passwword" />
+
+                    <TouchableOpacity style={AppStyle.StyleCommon.buttonNext} onPress={() => this._onRegister()}>
+                        <Text style={{ textAlign: 'center', fontSize: 16, color: 'orange' }}>Register</Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.inputContainer}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText} onPress={this._onRegister} >Register</Text>
-                    </TouchableOpacity>
-                </View>
-            </ImageBackground>
+                </KeyboardAvoidingView>
+            </View>
         );
     }
 }
