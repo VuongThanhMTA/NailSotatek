@@ -25,10 +25,17 @@ export default class BookingCompleteScreen extends Component {
                 </View>
 
                 <View style={AppStyle.StyleMain.centerContainer}>
-                    <Text >{this.state.mBooking.storeAddress}</Text>
-                    <Text >{this.state.mBooking.hour}</Text>
-                    <Text >{this.state.mBooking.date}</Text>
+                    <Text >{this.state.mBooking.add}</Text>
+                    <Text >{this.state.mBooking.time}</Text>
+                    <Text >{this.state.mBooking.day}</Text>
 
+                </View>
+                <View style={{ alignItems: 'center', justifyContent: 'center', bottom: 20 }}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('Home')}
+                        style={{ width: 100, height: 50, borderRadius: 32, backgroundColor: 'green', alignItems: 'center', justifyContent: 'center' }}>
+                        <Text>Home</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

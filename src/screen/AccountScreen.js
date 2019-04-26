@@ -65,6 +65,10 @@ export default class AccountScreen extends Component {
         return <Text style={{ margin: 5, color: '#BDBDBD' }} >Basic member</Text>;
     }
 
+    _goToHistoryBooking = () => {
+        this.props.navigation.navigate('HistoryBooking');
+    }
+
     render() {
         return (
             <ScrollView style={{ flex: 1 }}>
@@ -72,7 +76,7 @@ export default class AccountScreen extends Component {
                 <View style={{ flex: 1, marginTop: 4, flexDirection: 'column' }}>
                     <View style={{ flex: 1, flexDirection: 'column', padding: 20, margin: 10, backgroundColor: '#white' }}>
                         <Image style={{ width: 100, height: 100, borderRadius: 50, }} source={{ uri: this.state.mAvatar }} />
-                        <Text style={{ fontSize: 20 }}>YOUR NAME</Text>
+                        <Text style={{ fontSize: 20, margin: 5 }}>{this.state.mName}</Text>
                         {this._showMember()}
                     </View>
                     <View style={{ flex: 2, marginTop: 10, flexDirection: 'column', backgroundColor: '#FFFFFF' }}>
@@ -84,7 +88,10 @@ export default class AccountScreen extends Component {
                             <Text style={AppStyle.StyleCommon.accTextTouch}>Coupon</Text>
                         </TouchableOpacity>
                         <View style={AppStyle.StyleMain.line} />
-                        <TouchableOpacity style={AppStyle.StyleCommon.accTouch}>
+                        <TouchableOpacity
+                            style={ AppStyle.StyleCommon.accTouch }
+                            onPress={ ()=>this._goToHistoryBooking() }
+                        >
                             <Text style={AppStyle.StyleCommon.accTextTouch}>History</Text>
                         </TouchableOpacity>
                         <View style={AppStyle.StyleMain.line} />

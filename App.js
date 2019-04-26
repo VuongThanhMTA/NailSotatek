@@ -3,11 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import InputUserScreen from './src/screen/InputUserScreen';
 import HomeScreen from './src/screen/HomeScreen';
 import AppContainer from './src/navigators/AppContainer';
+import { Provider } from 'react-redux';
+import store from './src/global/store';
 
 export default class App extends React.Component {
   render() {
     return (
-      <AppContainer />
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
     );
   }
 }

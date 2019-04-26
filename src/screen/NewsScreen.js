@@ -127,7 +127,7 @@ export default class NewsScreen extends React.Component {
                 <View style={AppStyle.StyleCommon.memberContainer}>
                     <Image style={{ width: 60, height: 60, borderRadius: 30 }} source={{ uri: this.state.avatar }} />
                     <View style={{ flexDirection: 'column', justifyContent: 'center', paddingLeft: 10 }}>
-                        <Text style={{ margin: 5, textTransform: 'capitalize' }}>{this.state.name ? this.state.nam.toUpperCase() : "YOUR NAME"}</Text>
+                        <Text style={{ margin: 5, textTransform: 'capitalize' }}>{this.state.name ? this.state.name.toUpperCase() : "YOUR NAME"}</Text>
                         {this._showMember()}
                     </View>
                 </View>

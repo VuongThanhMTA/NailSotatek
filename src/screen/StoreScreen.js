@@ -184,7 +184,7 @@ export default class StoreScreen extends React.Component {
         return (
             <View style={{ flex: 1 }}>
                 <MapView
-                    followsUserLocation={true}
+                  //  followsUserLocation={true}
                     showsUserLocation={true}
                     style={{ flex: 1, margin: 5 }}
                     initialRegion={

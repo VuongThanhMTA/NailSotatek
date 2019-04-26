@@ -6,11 +6,11 @@ import PickTimeScreen from '../screen/PickTimeScreen';
 import BookingCompleteScreen from '../screen/BookingCompleteScreen';
 import MemershipScreen from '../screen/MemershipScreen';
 import CouponScreen from '../screen/CouponScreen';
-
+import HistoryBookingScreen from '../screen/HistoryBookingScreen';
 
 import { createStackNavigator } from 'react-navigation';
 
-const HomeStack = createStackNavigator(
+const HomeStack = createStackNavigator (
     {
         Home: HomwScreenAnimated,
         Web: WebNewsScreen,
@@ -18,7 +18,8 @@ const HomeStack = createStackNavigator(
         Mem: MemershipScreen,
         Coupon: CouponScreen,
         PickTime: PickTimeScreen,
-        Complete: BookingCompleteScreen
+        Complete: BookingCompleteScreen,
+        HistoryBooking:HistoryBookingScreen,
     },
     {
         initialRouteName: "Home",

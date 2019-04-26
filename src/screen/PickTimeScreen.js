@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity, ListView, Dimensions } from 'react-native';
 import AppStyle from '../theme';
-
+import { connect } from 'react-redux';
+import { addBooking } from '../global/actions';
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
-export default class PickTimeScreen extends Component {
+class PickTimeScreen extends Component {
 
     constructor(props) {
         super(props)
@@ -90,11 +91,14 @@ export default class PickTimeScreen extends Component {
 
     _onNext = () => {
         console.log('Complete Booking')
+        const id = this.props.bookings.length;
         const booking = {
-            storeAddress: this.state.mStoreAddress,
-            date: this.state.routers[this.state.indexPickDate].time,
-            hour: this.state.hourPicked
+            id: id,
+            add: this.state.mStoreAddress,
+            day: this.state.routers[this.state.indexPickDate].time,
+            time: this.state.hourPicked
         }
+        this.props.addBooking(booking);
         this.props.navigation.navigate('Complete', { booking: booking })
     }
 
@@ -146,3 +150,17 @@ export default class PickTimeScreen extends Component {
         );
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        bookings: state
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addBooking: (booking) => dispatch(addBooking(booking))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PickTimeScreen);
